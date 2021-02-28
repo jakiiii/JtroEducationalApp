@@ -25,6 +25,8 @@ urlpatterns = [
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),
+
+    path('', include('home.urls')),
 ]
 
 if settings.DEBUG:
