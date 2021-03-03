@@ -26,7 +26,24 @@ SECRET_KEY = 'o8vi9-+-y8ir=%0*%_6z2-mbqlfy!+j!zpv_o86xhvj$#l-@g@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '*']
+
+# SMTP GMAIL Settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pakijadjangoproject@gmail.com'
+EMAIL_HOST_PASSWORD = 'a$$4u1tpakija'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'jTro | jTro eEducation (pakijadjangoproject@gmail.com)'
+BASE_URL = '127.0.0.1:8000'
+# BASE_URL = '000.000.000.000:0000'
+
+
+MANAGERS = [
+    ('LMS', 'pakijadjangoproject@gmail.com'),
+]
+
+ADMINS = MANAGERS
 
 
 # Application definition
@@ -49,11 +66,22 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'accounts',
+    'profiles',
     'home',
     'courses',
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS + LOCAL_APPS
+
+# Custom User Auth
+AUTH_USER_MODEL = 'accounts.User'
+
+# Login and Logout
+LOGIN_URL = '/account/login/'
+LOGIN_URL_REDIRECT = '/'
+LOGOUT_URL = '/logout/'
+LOGOUT_URL_REDIRECT = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} || {{ block.super }}{% endblock title %}
+
+{% block content %}
+    <div class="pt-32pt pt-sm-64pt pb-32pt">
+        <div class="container page__container">
+            <form method="post" class="col-md-5 p-0 mx-auto">{% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label" for="email">Email:</label>
+                    <input id="email" type="text" name="email" class="form-control"
+                           placeholder="Your email address ...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password:</label>
+                    <input id="password" type="password" name="password" class="form-control"
+                           placeholder="Your first and last name ...">
+                    <p class="text-right">
+                        <a href="{% url 'password_reset' %}" class="small">Forgot your password?</a>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="page-separator justify-content-center m-0">
+        <div class="page-separator__text">or sign-in with</div>
+    </div>
+    <div class="bg-body pt-32pt pb-32pt pb-md-64pt text-center">
+        <div class="container page__container">
+            <a href="fixed-index.html" class="btn btn-secondary btn-block-xs">Facebook</a>
+            <a href="fixed-index.html" class="btn btn-secondary btn-block-xs">Twitter</a>
+            <a href="fixed-index.html" class="btn btn-secondary btn-block-xs">Google+</a>
+            <br/><br/>
+            <a href="{% url 'register' %}" class="btn btn-secondary btn-block-xs">Create Account With Email</a>
+        </div>
+    </div>
+{% endblock %}
+
+
+<div>
+    <h1>User Login</h1>
+    <hr/>
+    <div class="" align="" style="margin-left: 14rem;">
+        <div class="card" style="width: 40rem; margin-top: 2rem;">
+            <div class="card-header text-left"><b>User Login</b></div>
+            <div class="card-body">
+                {% include 'form.html' %}
+                <a href="{% url 'register' %}" class="float-left" style="text-decoration: none;">Create new account.</a>
+                <a href="{% url 'password_reset' %}" class="float-right" style="text-decoration: none;">Forger your
+                    password.</a>
+            </div><!-- end of card body -->
+        </div><!-- end of card -->
+        <div class="col-6" style="margin-top: 2rem; margin-left: 6rem;">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p {% if message.tags %} class="text-center {{ message.tags }}"{% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

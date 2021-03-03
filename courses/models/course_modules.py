@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import settings
 from django.db.models.signals import pre_save
 from django.contrib.contenttypes.fields import GenericRelation
 
@@ -12,6 +12,8 @@ from courses.models.subject_models import Subject
 
 from jtro_educa.utils import unique_slug_generator
 from jtro_educa.utils import upload_image_path
+
+USER = settings.AUTH_USER_MODEL
 
 
 class CourseQuerySet(models.QuerySet):
@@ -30,8 +32,8 @@ class Course(models.Model):
         ('advance', 'ADVANCED'),
     )
     course_id = models.CharField(unique=True, default=uuid.uuid4, max_length=55)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_created')
-    students = models.ManyToManyField(User, related_name='course_joined', blank=True)
+    author = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='course_created')
+    students = models.ManyToManyField(USER, related_name='course_joined', blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='courses')
     title = models.CharField(max_length=250)
     price = models.DecimalField(max_digits=20, decimal_places=2)

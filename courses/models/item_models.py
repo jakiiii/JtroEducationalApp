@@ -1,14 +1,16 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import settings
 from django.template.loader import render_to_string
 
 from ckeditor.fields import RichTextField
 
 from jtro_educa.utils import upload_image_path
 
+USER = settings.AUTH_USER_MODEL
+
 
 class ItemBase(models.Model):
-    owner = models.ForeignKey(User, related_name='%(class)s_related', on_delete=models.CASCADE)
+    owner = models.ForeignKey(USER, related_name='%(class)s_related', on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
