@@ -32,7 +32,7 @@ class Course(models.Model):
         ('advance', 'ADVANCED'),
     )
     course_id = models.CharField(unique=True, default=uuid.uuid4, max_length=55)
-    author = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='course_created')
+    owner = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='course_created')
     students = models.ManyToManyField(USER, related_name='course_joined', blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='courses')
     title = models.CharField(max_length=250)
